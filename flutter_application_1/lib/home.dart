@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/add_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -22,7 +23,9 @@ class Home extends StatelessWidget {
                       ),
                       Image.asset("assets/note3.jpg"),
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Addscreen(),));
+                          },
                           child: Text(
                             "Add notes",
                             style: TextStyle(
