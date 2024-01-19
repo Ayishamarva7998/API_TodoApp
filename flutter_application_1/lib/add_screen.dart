@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/home_c.dart';
+import 'package:provider/provider.dart';
 import 'home.dart';
 
 class Addscreen extends StatelessWidget {
@@ -30,7 +32,7 @@ class Addscreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 250, 
+                  width: 250,
                   child: TextFormField(
                     controller: title,
                     decoration: const InputDecoration(
@@ -39,10 +41,10 @@ class Addscreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 20, // Adjust the height as needed
+                  height: 20,
                 ),
                 SizedBox(
-                  width: 250, // Adjust the width as needed
+                  width: 250,
                   child: TextFormField(
                     controller: description,
                     decoration: const InputDecoration(
@@ -50,7 +52,19 @@ class Addscreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                ElevatedButton(onPressed: (){}, child: const Text("save",style: TextStyle(color:Color.fromARGB(255, 255, 98, 0), ),))
+                Consumer<TodoProvider>(builder: (context, value, child) => 
+                ElevatedButton(
+                      onPressed: () {
+                        value.addTodo(context);
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        "save",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 255, 98, 0),
+                        ),
+                      )),
+                )
               ],
             ),
           ),
