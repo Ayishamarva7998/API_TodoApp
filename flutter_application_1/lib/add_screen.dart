@@ -1,75 +1,106 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/home_c.dart';
-import 'package:provider/provider.dart';
-import 'home.dart';
 
-class Addscreen extends StatelessWidget {
-  const Addscreen({Key? key}) : super(key: key);
+import 'package:provider/provider.dart';
+
+class AddScreen extends StatefulWidget {
+  String id;
+  String title;
+  String description;
+  AddScreen({super.key,required this.id,required this.title,required this.description});
+
+  @override
+  State<AddScreen> createState() => _AddNotesState();
+}
+
+class _AddNotesState extends State<AddScreen> {
+  @override
+  void initState() {
+    final editpro = Provider.of<TodoProvider>(context,listen: false);
+    editpro.title=TextEditingController(text: widget.title);
+    editpro.description=TextEditingController(text: widget.description);
+    super.initState();
+  }
+  bool isEdit = false;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController title = TextEditingController();
-    TextEditingController description = TextEditingController();
-
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: const Text("Welcome"),
-          leading: IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Home()),
-              );
-            },
-            icon: const Icon(Icons.arrow_back),
-          ),
-        ),
+            iconTheme: const IconThemeData(color: Colors.white),
+            backgroundColor: Colors.black,
+            title: Text(
+              isEdit ?"Add Note":  "Edit Note" ,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold),
+            )),
         body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 250,
-                  child: TextFormField(
-                    controller: title,
-                    decoration: const InputDecoration(
-                      hintText: "Title",
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  width: 250,
-                  child: TextFormField(
-                    controller: description,
-                    decoration: const InputDecoration(
-                      hintText: "Description",
-                    ),
-                  ),
-                ),
-                Consumer<TodoProvider>(builder: (context, value, child) => 
-                ElevatedButton(
-                      onPressed: () {
-                        value.addTodo(context);
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
-                        "save",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 98, 0),
-                        ),
-                      )),
-                )
-              ],
-            ),
+            child: Card(
+                color: Colors.black26,
+                child: SizedBox(
+                    height: 400,
+                    width: 400,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 40, left: 40),
+                            child: Consumer<TodoProvider>(
+                              builder: (context, value, child) => TextFormField(
+                                controller: value.title,
+                                decoration: const InputDecoration(
+                                  hintText: "Title",
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 40, right: 40),
+                            child: Consumer<TodoProvider>(
+                              builder: (context, value, child) => TextFormField(
+                                controller: value.description,
+                                maxLines: 4,
+                                decoration: const InputDecoration(
+                                  hintText: "Notes",
+                                  prefixStyle: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Consumer<TodoProvider>(
+  builder: (context, value, child) => GestureDetector(
+    onTap: () async {
+      if (isEdit) {
+        value.addTodo(context);
+      } else {
+         value.updateNote(id: widget.id);
+      }
+      Navigator.of(context).pop();
+    },
+    child: Container(
+      height: 35,
+      width: 70,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          isEdit ?"Add" : "Update" , // Adjust the button text
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
           ),
         ),
       ),
-    );
+    ),
+  ),
+)
+
+                        ])))));
   }
 }

@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
                       Image.asset("assets/note3.jpg"),
                       ElevatedButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => Addscreen(),));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => AddScreen(description: '',id: '',title: ''),));
                           },
                           child: const Text(
                             "Add notes",
@@ -48,72 +48,71 @@ class _HomeState extends State<Home> {
                   )),
               Expanded(
                 child: Consumer<TodoProvider>(builder: (context, pro, child) => 
-                  FutureBuilder(future: TodoSevice().getTodo(),
-                    builder: (context, snapshot) => 
-                     ListView.builder(
-                      // itemCount: 10,
-                      itemCount: pro.TodoList.length,
-                      itemBuilder: (ctx, index) {
-                        final dataa=pro.TodoList[index];
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            child: ListTile(
-                              onTap: () {},
-                              leading: CircleAvatar(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 255, 98, 0),
-                                child: Text(
-                                  '${index + 1}',
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.white),
-                                ),
-                              ),
-                              title: Text(
-                                // "title",
-                                dataa.title??'N/A',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              subtitle:  Text(
-                                // 'description',s
-                                dataa.description??"N/A",
-
-                                style: TextStyle(fontSize: 16),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              trailing: PopupMenuButton(
-                                onSelected: (value) {
-                                  if (value == "Edit") {
-                                   
-                                  } else if (value == "Delete") {
+                  ListView.builder(
+                   // itemCount: 10,
+                   itemCount: pro.TodoList.length,
+                   itemBuilder: (ctx, index) {
+                     final dataa=pro.TodoList[index];
+                     return Padding(
+                       padding: const EdgeInsets.all(8.0),
+                       child: Card(
+                         elevation: 5,
+                         shape: RoundedRectangleBorder(
+                           borderRadius: BorderRadius.circular(15.0),
+                         ),
+                         child: ListTile(
+                           onTap: () {},
+                           leading: CircleAvatar(
+                             backgroundColor:
+                                 const Color.fromARGB(255, 255, 98, 0),
+                             child: Text(
+                               '${index + 1}',
+                               style: const TextStyle(
+                                   fontSize: 20, color: Colors.white),
+                             ),
+                           ),
+                           title: Text(
+                             // "title",
+                             dataa.title.toString(),
+                             style: const TextStyle(
+                                 fontSize: 20, fontWeight: FontWeight.bold),
+                           ),
+                           subtitle:  Text(
+                             // 'description',s
+                             dataa.description??"N/A",
+                  
+                             style: TextStyle(fontSize: 16),
+                             maxLines: 2,
+                             overflow: TextOverflow.ellipsis,
+                           ),
+                           trailing: PopupMenuButton(
+                             onSelected: (value) {
+                               if (value == "Edit") {
+                                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddScreen(id:dataa.id??'',description:dataa.description??'',title: dataa.title??'',),));
                                 
-                                  }
-                                },
-                                itemBuilder: (context) {
-                                  return [
-                                    const PopupMenuItem(
-                                      value: "Edit",
-                                      child: Text("Edit"),
-                                    ),
-                                    const PopupMenuItem(
-                                      value: "Delete",
-                                      child: Text("Delete"),
-                                    )
-                                  ];
-                                },
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                               } else if (value == "Delete") {
+                                 pro.deletTodo(id: dataa.id);
+                             
+                               }
+                             },
+                             itemBuilder: (context) {
+                               return [
+                                 const PopupMenuItem(
+                                   value: "Edit",
+                                   child: Text("Edit"),
+                                 ),
+                                 const PopupMenuItem(
+                                   value: "Delete",
+                                   child: Text("Delete"),
+                                 )
+                               ];
+                             },
+                           ),
+                         ),
+                       ),
+                     );
+                   },
+                                      ),
                 ),
               ),
             ],
