@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/add_screen.dart';
-import 'package:flutter_application_1/controller/home_c.dart';
-import 'package:flutter_application_1/service/apiservice.dart';
+import 'package:flutter_application_1/Allscreens/add_screen/add_screen.dart';
+import 'package:flutter_application_1/controller/home_controller.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -81,7 +80,7 @@ class _HomeState extends State<Home> {
                              // 'description',s
                              dataa.description??"N/A",
                   
-                             style: TextStyle(fontSize: 16),
+                             style: const TextStyle(fontSize: 16),
                              maxLines: 2,
                              overflow: TextOverflow.ellipsis,
                            ),

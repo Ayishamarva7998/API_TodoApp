@@ -1,11 +1,14 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/service/apiservice.dart';
-import 'package:flutter_application_1/todo_model.dart';
+import 'package:flutter_application_1/model/todo_model.dart';
 
 
 class TodoProvider extends ChangeNotifier{
   TextEditingController title=TextEditingController();
   TextEditingController description=TextEditingController();
+  // ignore: non_constant_identifier_names
   List<TodoModel> TodoList=[];
   fetchTodo() async{
     try {
@@ -26,6 +29,7 @@ class TodoProvider extends ChangeNotifier{
         notifyListeners();
       })
       .catchError((error) {
+    
         print('Error adding notes: $error');
       });
 }
@@ -36,7 +40,7 @@ class TodoProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  updateNote({required id}){
+  updateTodo({required id}){
    var editTitle=title.text;
    var editdescription=description.text;
    fetchTodo();

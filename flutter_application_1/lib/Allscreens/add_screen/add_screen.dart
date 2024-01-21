@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controller/home_c.dart';
-
+import 'package:flutter_application_1/controller/home_controller.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class AddScreen extends StatefulWidget {
   String id;
   String title;
@@ -30,7 +30,7 @@ class _AddNotesState extends State<AddScreen> {
             iconTheme: const IconThemeData(color: Colors.white),
             backgroundColor: Colors.black,
             title: Text(
-              isEdit ?"Add Note":  "Edit Note" ,
+              isEdit ?"Add Note":  "Edit Todo" ,
               style: const TextStyle(
                   color: Colors.white,
                   fontStyle: FontStyle.italic,
@@ -63,8 +63,8 @@ class _AddNotesState extends State<AddScreen> {
                                 controller: value.description,
                                 maxLines: 4,
                                 decoration: const InputDecoration(
-                                  hintText: "Notes",
-                                  prefixStyle: TextStyle(color: Colors.black),
+                                  hintText: "Description",
+                                  prefixStyle: TextStyle(color: const Color.fromARGB(255, 255, 98, 0),),
                                 ),
                               ),
                             ),
@@ -76,7 +76,7 @@ class _AddNotesState extends State<AddScreen> {
       if (isEdit) {
         value.addTodo(context);
       } else {
-         value.updateNote(id: widget.id);
+         value.updateTodo(id: widget.id);
       }
       Navigator.of(context).pop();
     },

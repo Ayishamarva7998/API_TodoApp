@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_application_1/todo_model.dart';
+import 'package:flutter_application_1/model/todo_model.dart';
 
 
 class TodoSevice {

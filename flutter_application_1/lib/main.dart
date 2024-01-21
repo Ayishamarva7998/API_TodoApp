@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controller/home_c.dart';
-import 'package:flutter_application_1/home.dart';
+import 'package:flutter_application_1/controller/home_controller.dart';
+import 'package:flutter_application_1/Allscreens/home_screen/home.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(create: (context) => TodoProvider(),
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Home(),
         
