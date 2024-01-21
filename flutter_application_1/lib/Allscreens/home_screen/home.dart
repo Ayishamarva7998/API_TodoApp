@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
               Expanded(
                 child: Consumer<TodoProvider>(builder: (context, pro, child) => 
                   ListView.builder(
-                   // itemCount: 10,
+              
                    itemCount: pro.TodoList.length,
                    itemBuilder: (ctx, index) {
                      final dataa=pro.TodoList[index];
@@ -71,13 +71,13 @@ class _HomeState extends State<Home> {
                              ),
                            ),
                            title: Text(
-                             // "title",
+                        
                              dataa.title.toString(),
                              style: const TextStyle(
                                  fontSize: 20, fontWeight: FontWeight.bold),
                            ),
                            subtitle:  Text(
-                             // 'description',s
+                       
                              dataa.description??"N/A",
                   
                              style: const TextStyle(fontSize: 16),
