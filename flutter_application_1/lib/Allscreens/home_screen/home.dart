@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Allscreens/add_screen/add_screen.dart';
+import 'package:flutter_application_1/Allscreens/Addscreen/add_screen.dart';
 import 'package:flutter_application_1/controller/home_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
                       Image.asset("assets/note3.jpg"),
                       ElevatedButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => AddScreen(description: '',id: '',title: ''),));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => AddScreen(id: "", title:"", description: "")));
                           },
                           child: const Text(
                             "Add notes",

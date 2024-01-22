@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/home_controller.dart';
-
 import 'package:provider/provider.dart';
-
-// ignore: must_be_immutable
 class AddScreen extends StatefulWidget {
   String id;
   String title;
@@ -25,13 +22,13 @@ class _AddNotesState extends State<AddScreen> {
   bool isEdit = false;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Scaffold(
         appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.white),
             backgroundColor: Colors.black,
-            title: Text(
-              isEdit ?"Add Note":  "Edit Note" ,
+            title: Text(  
+              isEdit ? "Edit Note": "Add Note" ,
               style: const TextStyle(
                   color: Colors.white,
                   fontStyle: FontStyle.italic,
@@ -75,9 +72,10 @@ class _AddNotesState extends State<AddScreen> {
   builder: (context, value, child) => GestureDetector(
     onTap: () async {
       if (isEdit) {
-        value.addTodo(context);
-      } else {
          value.updateTodo(id: widget.id);
+       
+      } else {
+         value.addTodo(context);
       }
       Navigator.of(context).pop();
     },
@@ -91,7 +89,7 @@ class _AddNotesState extends State<AddScreen> {
       child: Align(
         alignment: Alignment.center,
         child: Text(
-          isEdit ?"Add" : "Update" , // Adjust the button text
+          isEdit ? "Update" : "Add"  ,
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,

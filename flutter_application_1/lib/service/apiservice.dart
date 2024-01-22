@@ -9,7 +9,7 @@ class TodoSevice {
 
   Future<List<TodoModel>>  getTodo() async {
     try {
-      Response response = await Dio().get(endPointUrl);
+      Response response = await dio.get(endPointUrl);
       if (response.statusCode == 200) {
         var jsonList = response.data as List;
         List<TodoModel> datas = jsonList.map((json) {
@@ -17,10 +17,10 @@ class TodoSevice {
         }).toList();
         return datas;
       } else {
-        throw Exception('fainld loaded notes');
+        throw Exception('failed loaded Todo');
       }
     } catch (error) {
-      throw Exception('Failed to load notes: $error');
+      throw Exception('Failed to load Todo: $error');
     }
   }
 

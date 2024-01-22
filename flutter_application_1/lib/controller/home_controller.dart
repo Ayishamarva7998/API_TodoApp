@@ -8,14 +8,14 @@ import 'package:flutter_application_1/model/todo_model.dart';
 class TodoProvider extends ChangeNotifier{
   TextEditingController title=TextEditingController();
   TextEditingController description=TextEditingController();
-  // ignore: non_constant_identifier_names
+
   List<TodoModel> TodoList=[];
   fetchTodo() async{
     try {
-      List<TodoModel> listt= await TodoSevice().getTodo();
-      TodoList=listt;
+      TodoList= await TodoSevice().getTodo();
+    
     } catch (error) {
-       print('error loading notes:$error');
+       print('error loading Todo:$error');
     }
     notifyListeners();
   }
@@ -30,7 +30,7 @@ class TodoProvider extends ChangeNotifier{
       })
       .catchError((error) {
     
-        print('Error adding notes: $error');
+        print('Error adding Todo: $error');
       });
 }
 
