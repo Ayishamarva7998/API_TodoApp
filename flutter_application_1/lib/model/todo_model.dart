@@ -10,10 +10,14 @@ class TodoModel {
   }
 
   Map<String, dynamic> toJson() {
+    // ignore: prefer_collection_literals
     final Map<String, dynamic> data = Map<String, dynamic>();
+    // ignore: unnecessary_this
     data['id'] = this.id;
+    // ignore: unnecessary_this
     data['title'] = this.title;
-    data['description'] = this.description;
+    // ignore: unnecessary_this
+    data['description'] = this.description; 
     return data;
   }
 }
